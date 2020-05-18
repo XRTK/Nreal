@@ -1,7 +1,7 @@
 variables:
-  project.name: 'XRTK.PlatformName'
+  project.name: 'XRTK.Nreal'
   project.upmSha: ''
-  package.name: 'com.xrtk.platformname'
+  package.name: 'com.xrtk.nreal'
   package.version: ''
   EditorPath: ''
   LogDirectory: ''
@@ -25,12 +25,12 @@ pr:
     include:
     - azure-pipelines.yml
     - azure_pipelines/*
-    - PlatformName/*
+    - Nreal/*
     exclude:
       - '*'
-      - XRTK.PlatformName/Packages/com.xrtk.platformname/README.md
-      - XRTK.PlatformName/Packages/com.xrtk.platformname/LICENSE.md
-      - XRTK.PlatformName/Packages/com.xrtk.platformname/.github/*
+      - XRTK.Nreal/Packages/com.xrtk.nreal/README.md
+      - XRTK.Nreal/Packages/com.xrtk.nreal/LICENSE.md
+      - XRTK.Nreal/Packages/com.xrtk.nreal/.github/*
 
 trigger:
   batch: true
@@ -41,13 +41,15 @@ trigger:
     include:
       - azure-pipelines.yml
       - azure_pipelines/*
-      - PlatformName/*
+      - Nreal/*
     exclude:
       - '*'
-      - XRTK.PlatformName/Packages/com.xrtk.platformname/README.md
-      - XRTK.PlatformName/Packages/com.xrtk.platformname/LICENSE.md
-      - XRTK.PlatformName/Packages/com.xrtk.platformname/.github/*
+      - XRTK.Nreal/Packages/com.xrtk.nreal/README.md
+      - XRTK.Nreal/Packages/com.xrtk.nreal/LICENSE.md
+      - XRTK.Nreal/Packages/com.xrtk.nreal/.github/*
 
 extends:
   template: azure_pipelines/common.yml
+
+
 

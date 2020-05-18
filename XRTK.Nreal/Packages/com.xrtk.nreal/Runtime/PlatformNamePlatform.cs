@@ -1,4 +1,4 @@
-﻿// Copyright (c) XRTK. All rights reserved.
+// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using System;
@@ -6,10 +6,10 @@ using System;
 namespace XRTK.Definitions.Platforms
 {
     /// <summary>
-    /// Used by the XRTK to signal that the feature is available on the PlatformName platform.
+    /// Used by the XRTK to signal that the feature is available on the Nreal platform.
     /// </summary>
     [System.Runtime.InteropServices.Guid("#INSERT_GUID_HERE#")]
-    public class PlatformNamePlatform : BasePlatform
+    public class NrealPlatform : BasePlatform
     {
         /// <inheritdoc />
         public override bool IsAvailable

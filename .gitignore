@@ -64,5 +64,6 @@ artifacts/
 ThirdParty/
 ThirdParty.meta
 --Version/
-XRTK.PlatformName/Assets/PlatformName/Profiles
-XRTK.PlatformName/Assets/PlatformName/Profiles.meta
+XRTK.Nreal/Assets/Nreal/Profiles
+XRTK.Nreal/Assets/Nreal/Profiles.meta
+
