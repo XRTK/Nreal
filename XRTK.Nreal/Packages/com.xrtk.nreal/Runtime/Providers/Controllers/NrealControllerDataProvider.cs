@@ -10,7 +10,7 @@ using XRTK.Providers.Controllers;
 namespace XRTK.Nreal.Providers.Controllers
 {
     [RuntimePlatform(typeof(NrealPlatform))]
-    [System.Runtime.InteropServices.Guid("#INSERT_GUID_HERE#")]
+    [System.Runtime.InteropServices.Guid("963FAD3E-7E38-4181-9888-B3302AECB83B")]
     public class NrealControllerDataProvider : BaseControllerDataProvider
     {
         /// <inheritdoc />

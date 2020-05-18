@@ -10,7 +10,7 @@ using XRTK.Providers.CameraSystem;
 namespace XRTK.Nreal.Providers.CameraSystem
 {
     [RuntimePlatform(typeof(NrealPlatform))]
-    [System.Runtime.InteropServices.Guid("#INSERT_GUID_HERE#")]
+    [System.Runtime.InteropServices.Guid("7DAE1368-9020-4E7D-B11B-5A8985631247")]
     public class NrealCameraDataProvider : BaseCameraDataProvider
     {
         /// <inheritdoc />
