@@ -5,7 +5,7 @@ using XRTK.Providers.Controllers;
 
 namespace XRTK.Nreal.Providers.Controllers
 {
-    [System.Runtime.InteropServices.Guid("#INSERT_GUID_HERE#")]
+    [System.Runtime.InteropServices.Guid("B765E0F1-FF93-4DDE-8F69-E44614055639")]
     public class NrealController : BaseController
     {
     }
