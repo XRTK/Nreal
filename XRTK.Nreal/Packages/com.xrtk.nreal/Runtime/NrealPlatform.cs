@@ -19,13 +19,7 @@ namespace XRTK.Definitions.Platforms
         private static Version NRSDKVersion => new Version(NRVersionInfo.GetVersion());
 
         /// <inheritdoc />
-        public override bool IsAvailable
-        {
-            get
-            {
-                return !Application.isEditor && NRSDKVersion > NoVersion;
-            }
-        }
+        public override bool IsAvailable => !Application.isEditor && NRSDKVersion > NoVersion;
 
         /// <inheritdoc />
         public override bool IsBuildTargetAvailable

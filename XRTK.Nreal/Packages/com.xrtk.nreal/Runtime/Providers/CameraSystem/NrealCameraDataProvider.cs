@@ -1,6 +1,8 @@
 // Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
+using NRKernal;
+using UnityEngine;
 using XRTK.Attributes;
 using XRTK.Definitions.CameraSystem;
 using XRTK.Definitions.Platforms;
@@ -13,6 +15,10 @@ namespace XRTK.Nreal.Providers.CameraSystem
     [System.Runtime.InteropServices.Guid("7DAE1368-9020-4E7D-B11B-5A8985631247")]
     public class NrealCameraDataProvider : BaseCameraDataProvider
     {
+        private NRHMDPoseTracker poseTracker;
+        private GameObject leftCameraObject;
+        private GameObject rightCameraObject;
+
         /// <inheritdoc />
         public NrealCameraDataProvider(string name, uint priority, BaseMixedRealityCameraDataProviderProfile profile, IMixedRealityCameraSystem parentService)
             : base(name, priority, profile, parentService)
@@ -21,5 +27,53 @@ namespace XRTK.Nreal.Providers.CameraSystem
 
         /// <inheritdoc />
         public override bool IsOpaque => false;
+
+        /// <inheritdoc />
+        public override void Enable()
+        {
+            base.Enable();
+
+            if (!Application.isPlaying) { return; }
+
+            poseTracker = CameraRig.PlayerCamera.gameObject.AddComponent<NRHMDPoseTracker>();
+            poseTracker.centerCamera = CameraRig.PlayerCamera;
+
+            leftCameraObject = new GameObject("LeftCamera");
+            leftCameraObject.transform.SetParent(CameraRig.PlayspaceTransform, false);
+            var leftCamera = leftCameraObject.AddComponent<Camera>();
+            poseTracker.leftCamera = leftCamera;
+
+            rightCameraObject = new GameObject("RightCamera");
+            rightCameraObject.transform.SetParent(CameraRig.PlayspaceTransform, false);
+            var rightCamera = rightCameraObject.AddComponent<Camera>();
+            poseTracker.rightCamera = rightCamera;
+
+            // TODO SETUP the NRSession behaviour
+        }
+
+        /// <inheritdoc />
+        public override void Disable()
+        {
+            base.Disable();
+
+            if (!Application.isPlaying) { return; }
+
+            if (poseTracker != null)
+            {
+                Object.Destroy(poseTracker);
+            }
+
+            if (leftCameraObject != null)
+            {
+                Object.Destroy(leftCameraObject);
+            }
+
+            if (rightCameraObject != null)
+            {
+                Object.Destroy(rightCameraObject);
+            }
+
+            // TODO SETUP the NRSession behaviour
+        }
     }
 }
