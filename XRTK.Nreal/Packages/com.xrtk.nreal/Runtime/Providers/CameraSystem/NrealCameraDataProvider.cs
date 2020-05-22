@@ -18,5 +18,8 @@ namespace XRTK.Nreal.Providers.CameraSystem
             : base(name, priority, profile, parentService)
         {
         }
+
+        /// <inheritdoc />
+        public override bool IsOpaque => false;
     }
 }

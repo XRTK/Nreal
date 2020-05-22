@@ -1,7 +1,8 @@
 // Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
-using System;
+using XRTK.Definitions.Platforms;
+using XRTK.Interfaces;
 
 namespace XRTK.Definitions.Platforms
 {
@@ -16,7 +17,7 @@ namespace XRTK.Definitions.Platforms
         {
             get
             {
-                return false;
+                return !UnityEngine.Application.isEditor; // TODO Check native api
             }
         }
 
@@ -25,8 +26,18 @@ namespace XRTK.Definitions.Platforms
         {
             get
             {
+#if UNITY_EDITOR
+                return UnityEditor.EditorUserBuildSettings.activeBuildTarget == UnityEditor.BuildTarget.Android; // TODO Check native api
+#else
                 return false;
+#endif
             }
         }
+
+        /// <inheritdoc />
+        public override IMixedRealityPlatform[] PlatformOverrides { get; } =
+        {
+            new AndroidPlatform()
+        };
     }
 }
