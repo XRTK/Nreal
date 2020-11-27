@@ -65,4 +65,6 @@ ThirdParty/
 ThirdParty.meta
 --Version/
 
-XRTK.Nreal/Assets/XRTK.Generated/Nreal
+XRTK.Nreal/Assets/XRTK.Generated/Nreal.meta
+XRTK.Nreal/Assets/XRTK.Generated/Nreal/Profiles
+XRTK.Nreal/Assets/XRTK.Generated/Nreal/Profiles.meta
