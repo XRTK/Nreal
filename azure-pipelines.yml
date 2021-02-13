@@ -18,8 +18,8 @@ variables:
     date: ''
   ${{ if ne( variables['build.reason'], 'PullRequest' ) }}:
     date: ${{ '$(Date:yyyyMMdd)' }}
-  isReleaseBuild: $[ and( eq(variables['Build.SourceBranchName'], 'master'), or( eq(variables['build.reason'], 'BatchedCI'), eq(variables['build.reason'], 'Manual') ) ) ]
-  isPreviewBuild: $[ and( eq(variables['System.PullRequest.TargetBranch'], 'master'), eq(variables['build.reason'], 'PullRequest') ) ]
+  isReleaseBuild: $[ and( eq(variables['Build.SourceBranchName'], 'main'), or( eq(variables['build.reason'], 'BatchedCI'), eq(variables['build.reason'], 'Manual') ) ) ]
+  isPreviewBuild: $[ and( eq(variables['System.PullRequest.TargetBranch'], 'main'), eq(variables['build.reason'], 'PullRequest') ) ]
 
 name: $(package.name) ${{ coalesce( variables['date'], '$(System.PullRequest.PullRequestNumber)', '$(Date:yyyyMMdd)' ) }}$(Rev:.r)
 
@@ -27,7 +27,7 @@ pr:
   autoCancel: true
   branches:
    include:
-     - master
+     - main
      - development
      - feature/*
   paths:
@@ -38,15 +38,15 @@ pr:
     - Submodules/*
     exclude:
       - '*'
+      - XRTK.Nreal/Packages/com.xrtk.nreal/package.json
       - XRTK.Nreal/Packages/com.xrtk.nreal/README.md
       - XRTK.Nreal/Packages/com.xrtk.nreal/LICENSE.md
-      - XRTK.Nreal/Packages/com.xrtk.nreal/.github/*
 
 trigger:
   batch: true
   branches:
     include:
-      - master
+      - main
   paths:
     include:
       - azure-pipelines.yml
@@ -55,9 +55,9 @@ trigger:
       - Submodules/*
     exclude:
       - '*'
+      - XRTK.Nreal/Packages/com.xrtk.nreal/package.json
       - XRTK.Nreal/Packages/com.xrtk.nreal/README.md
       - XRTK.Nreal/Packages/com.xrtk.nreal/LICENSE.md
-      - XRTK.Nreal/Packages/com.xrtk.nreal/.github/*
 
 extends:
   template: common.yml@pipeline_repo
