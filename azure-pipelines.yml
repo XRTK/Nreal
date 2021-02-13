@@ -1,3 +1,12 @@
+# XRTK Azure Pipelines build configuration
+
+resources:
+  repositories:
+    - repository: pipeline_repo
+      type: github
+      name: XRTK/AzurePipelines
+      endpoint: XRTK
+
 variables:
   project.name: 'XRTK.Nreal'
   project.upmSha: ''
@@ -9,8 +18,8 @@ variables:
     date: ''
   ${{ if ne( variables['build.reason'], 'PullRequest' ) }}:
     date: ${{ '$(Date:yyyyMMdd)' }}
-  isReleaseBuild: $[ and( eq(variables['Build.SourceBranchName'], 'master'), or( eq(variables['build.reason'], 'BatchedCI'), eq(variables['build.reason'], 'Manual') ) ) ]
-  isPreviewBuild: $[ and( eq(variables['System.PullRequest.TargetBranch'], 'master'), eq(variables['build.reason'], 'PullRequest') ) ]
+  isReleaseBuild: $[ and( eq(variables['Build.SourceBranchName'], 'main'), or( eq(variables['build.reason'], 'BatchedCI'), eq(variables['build.reason'], 'Manual') ) ) ]
+  isPreviewBuild: $[ and( eq(variables['System.PullRequest.TargetBranch'], 'main'), eq(variables['build.reason'], 'PullRequest') ) ]
 
 name: $(package.name) ${{ coalesce( variables['date'], '$(System.PullRequest.PullRequestNumber)', '$(Date:yyyyMMdd)' ) }}$(Rev:.r)
 
@@ -18,7 +27,7 @@ pr:
   autoCancel: true
   branches:
    include:
-     - master
+     - main
      - development
      - feature/*
   paths:
@@ -26,30 +35,35 @@ pr:
     - azure-pipelines.yml
     - azure_pipelines/*
     - XRTK.Nreal/*
+    - Submodules/*
     exclude:
       - '*'
+      - XRTK.Nreal/Packages/com.xrtk.nreal/package.json
       - XRTK.Nreal/Packages/com.xrtk.nreal/README.md
       - XRTK.Nreal/Packages/com.xrtk.nreal/LICENSE.md
-      - XRTK.Nreal/Packages/com.xrtk.nreal/.github/*
 
 trigger:
   batch: true
   branches:
     include:
-      - master
+      - main
   paths:
     include:
       - azure-pipelines.yml
       - azure_pipelines/*
       - XRTK.Nreal/*
+      - Submodules/*
     exclude:
       - '*'
+      - XRTK.Nreal/Packages/com.xrtk.nreal/package.json
       - XRTK.Nreal/Packages/com.xrtk.nreal/README.md
       - XRTK.Nreal/Packages/com.xrtk.nreal/LICENSE.md
-      - XRTK.Nreal/Packages/com.xrtk.nreal/.github/*
 
 extends:
-  template: azure_pipelines/common.yml
-
-
-
+  template: common.yml@pipeline_repo
+  parameters:
+    # Unity -buildTarget command line args https://docs.unity3d.com/Manual/CommandLineArguments.html
+    # StandaloneWindows64, WSAPlayer, StandaloneOSX, iOS, StandaloneLinux64, Android, WebGL, Lumin
+    # TODO: Only use XRTK defined platform targets for build
+    targets:
+      - Android
